@@ -12,12 +12,13 @@ matrix:
     language: android
     android:
       components:
-        - build-tools-21.1.1
+        - build-tools-21.1.2
         - platform-tools
         - extra-android-support
         - android-21
         - android-15
         - sys-img-armeabi-v7a-android-15
+        - extra-android-m2repository
     # Emulator Management: Create and start up in parallel with the install
     # An old emulator is used to use less resources
     before_install:
@@ -28,8 +29,12 @@ matrix:
     # Emulator Management: Wait until the emulator is ready
     before_script:
       - android-wait-for-emulator
+      - adb shell input keyevent 82
     # Build and test the Android examples
-    script: mvn verify -P android-examples -pl examples/android,examples/android/android-test -am -amd -Dandroid.device=test
+    script: 
+      - mvn verify -P android-examples -pl examples/android,examples/android/android-test -am -amd -Dandroid.device=test
+      - cd examples/android/android-studio
+      - for subdir in $(ls -d */); do cd $subdir && (./gradlew connectedCheck || exit 1) && cd ..; done
   - jdk: oraclejdk8
     script: mvn -q deploy -P java8 -pl java8 --settings .travis-settings.xml -Dno.gem.deploy=true
 
