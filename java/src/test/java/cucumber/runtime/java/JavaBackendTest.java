@@ -7,6 +7,7 @@ import cucumber.runtime.Glue;
 import cucumber.runtime.HookDefinition;
 import cucumber.runtime.StepDefinition;
 import cucumber.runtime.StepDefinitionMatch;
+import cucumber.runtime.*;
 import cucumber.runtime.java.stepdefs.Stepdefs;
 import gherkin.I18n;
 import gherkin.formatter.model.Step;
@@ -72,6 +73,26 @@ public class JavaBackendTest {
 
         @Override
         public List<HookDefinition> getAfterHooks() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void addBeforeHook(HookDefinition hookDefinition, HookScope scope) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void addAfterHook(HookDefinition hookDefinition, HookScope scope) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<HookDefinition> getBeforeHooks(HookScope scope) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<HookDefinition> getAfterHooks(HookScope scope) {
             throw new UnsupportedOperationException();
         }
 
