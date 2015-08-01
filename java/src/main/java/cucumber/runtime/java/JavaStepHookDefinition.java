@@ -1,5 +1,6 @@
 package cucumber.runtime.java;
 
+import cucumber.api.java.ObjectFactory;
 import gherkin.formatter.model.Step;
 import gherkin.formatter.model.Tag;
 
